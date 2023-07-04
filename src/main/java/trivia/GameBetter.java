@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 // REFACTOR ME
 public class GameBetter implements IGame {
+   public static final int TOTAL_NUMBER_OF_POSITIONS = 12;
    ArrayList players = new ArrayList();
    int[] places = new int[6];
    int[] purses = new int[6];
@@ -59,8 +60,7 @@ public class GameBetter implements IGame {
             isGettingOutOfPenaltyBox = true;
 
             System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
-            places[currentPlayer] = places[currentPlayer] + roll;
-            if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
+            movePlayer(roll);
 
             System.out.println(players.get(currentPlayer)
                                + "'s new location is "
@@ -74,8 +74,7 @@ public class GameBetter implements IGame {
 
       } else {
 
-         places[currentPlayer] = places[currentPlayer] + roll;
-         if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
+         movePlayer(roll);
 
          System.out.println(players.get(currentPlayer)
                             + "'s new location is "
@@ -84,6 +83,13 @@ public class GameBetter implements IGame {
          askQuestion();
       }
 
+   }
+
+   private void movePlayer(int roll) {
+      places[currentPlayer] = places[currentPlayer] + roll;
+      if (places[currentPlayer] > 11) {
+         places[currentPlayer] = places[currentPlayer] - TOTAL_NUMBER_OF_POSITIONS;
+      }
    }
 
    private void askQuestion() {
