@@ -61,16 +61,19 @@ public class GameBetter implements IGame {
             movePlayer(roll);
             askQuestion();
          } else {
-            System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
-            isGettingOutOfPenaltyBox = false;
+            stayInPenaltyBox();
          }
 
       } else {
-
          movePlayer(roll);
          askQuestion();
       }
 
+   }
+
+   private void stayInPenaltyBox() {
+      System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
+      isGettingOutOfPenaltyBox = false;
    }
 
    private void getOutOfPenaltyBox() {
