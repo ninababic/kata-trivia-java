@@ -61,11 +61,6 @@ public class GameBetter implements IGame {
 
             System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
             movePlayer(roll);
-
-            System.out.println(players.get(currentPlayer)
-                               + "'s new location is "
-                               + places[currentPlayer]);
-            System.out.println("The category is " + currentCategory());
             askQuestion();
          } else {
             System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
@@ -75,11 +70,6 @@ public class GameBetter implements IGame {
       } else {
 
          movePlayer(roll);
-
-         System.out.println(players.get(currentPlayer)
-                            + "'s new location is "
-                            + places[currentPlayer]);
-         System.out.println("The category is " + currentCategory());
          askQuestion();
       }
 
@@ -94,6 +84,10 @@ public class GameBetter implements IGame {
       if (places[currentPlayer] > 11) {
          places[currentPlayer] = places[currentPlayer] - TOTAL_NUMBER_OF_POSITIONS;
       }
+      System.out.println(players.get(currentPlayer)
+              + "'s new location is "
+              + places[currentPlayer]);
+      System.out.println("The category is " + currentCategory());
    }
 
    private void askQuestion() {
