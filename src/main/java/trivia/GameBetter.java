@@ -3,10 +3,12 @@ package trivia;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import static trivia.PlayerBuilder.playerBuilder;
+
 // REFACTOR ME
 public class GameBetter implements IGame {
    public static final int TOTAL_NUMBER_OF_POSITIONS = 12;
-   ArrayList players = new ArrayList();
+   ArrayList<Player> players = new ArrayList<>();
    int[] places = new int[6];
    int[] purses = new int[6];
    boolean[] inPenaltyBox = new boolean[6];
@@ -37,7 +39,10 @@ public class GameBetter implements IGame {
    }
 
    public boolean add(String playerName) {
-      players.add(playerName);
+      players.add(playerBuilder()
+              .name(playerName)
+              .inPenaltyBox(false)
+              .build());
       places[howManyPlayers()] = 0;
       purses[howManyPlayers()] = 0;
       inPenaltyBox[howManyPlayers()] = false;
@@ -52,7 +57,7 @@ public class GameBetter implements IGame {
    }
 
    public void roll(int roll) {
-      System.out.println(players.get(currentPlayer) + " is the current player");
+      System.out.println(players.get(currentPlayer).getPlayerName() + " is the current player");
       System.out.println("They have rolled a " + roll);
 
       if (inPenaltyBox[currentPlayer]) {
@@ -77,11 +82,11 @@ public class GameBetter implements IGame {
 
    private void getOutOfPenaltyBox() {
       isGettingOutOfPenaltyBox = true;
-      System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
+      System.out.println(players.get(currentPlayer).getPlayerName() + " is getting out of the penalty box");
    }
 
    private void stayInPenaltyBox() {
-      System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
+      System.out.println(players.get(currentPlayer).getPlayerName() + " is not getting out of the penalty box");
       isGettingOutOfPenaltyBox = false;
    }
 
@@ -90,7 +95,7 @@ public class GameBetter implements IGame {
       if (places[currentPlayer] > 11) {
          places[currentPlayer] = places[currentPlayer] - TOTAL_NUMBER_OF_POSITIONS;
       }
-      System.out.println(players.get(currentPlayer)
+      System.out.println(players.get(currentPlayer).getPlayerName()
               + "'s new location is "
               + places[currentPlayer]);
       System.out.println("The category is " + currentCategory());
@@ -126,10 +131,10 @@ public class GameBetter implements IGame {
          if (isGettingOutOfPenaltyBox) {
             System.out.println("Answer was correct!!!!");
             purses[currentPlayer]++;
-            System.out.println(players.get(currentPlayer)
-                               + " now has "
-                               + purses[currentPlayer]
-                               + " Gold Coins.");
+            System.out.println(players.get(currentPlayer).getPlayerName()
+                    + " now has "
+                    + purses[currentPlayer]
+                    + " Gold Coins.");
 
             boolean winner = didPlayerWin();
             currentPlayer++;
@@ -147,10 +152,10 @@ public class GameBetter implements IGame {
 
          System.out.println("Answer was corrent!!!!");
          purses[currentPlayer]++;
-         System.out.println(players.get(currentPlayer)
-                            + " now has "
-                            + purses[currentPlayer]
-                            + " Gold Coins.");
+         System.out.println(players.get(currentPlayer).getPlayerName()
+                 + " now has "
+                 + purses[currentPlayer]
+                 + " Gold Coins.");
 
          boolean winner = didPlayerWin();
          currentPlayer++;
@@ -162,7 +167,7 @@ public class GameBetter implements IGame {
 
    public boolean wrongAnswer() {
       System.out.println("Question was incorrectly answered");
-      System.out.println(players.get(currentPlayer) + " was sent to the penalty box");
+      System.out.println(players.get(currentPlayer).getPlayerName() + " was sent to the penalty box");
       inPenaltyBox[currentPlayer] = true;
 
       currentPlayer++;
