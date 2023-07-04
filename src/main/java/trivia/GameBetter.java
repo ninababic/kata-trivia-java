@@ -71,9 +71,8 @@ public class GameBetter implements IGame {
 
    }
 
-   private void stayInPenaltyBox() {
-      System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
-      isGettingOutOfPenaltyBox = false;
+   private static boolean isOddNumber(int roll) {
+      return roll % 2 != 0;
    }
 
    private void getOutOfPenaltyBox() {
@@ -81,8 +80,9 @@ public class GameBetter implements IGame {
       System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
    }
 
-   private static boolean isOddNumber(int roll) {
-      return roll % 2 != 0;
+   private void stayInPenaltyBox() {
+      System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
+      isGettingOutOfPenaltyBox = false;
    }
 
    private void movePlayer(int roll) {
