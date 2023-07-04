@@ -86,6 +86,7 @@ public class GameBetter implements IGame {
 
    private void getOutOfPenaltyBox() {
       isGettingOutOfPenaltyBox = true;
+      inPenaltyBox[currentPlayer] = false;
       System.out.println(players.get(currentPlayer).getPlayerName() + " is getting out of the penalty box");
    }
 
